@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main">
+
+    {% if probabilities %}
+
+            <div class="boutton_predict">
+                {% for class_name, probability in probabilities.items %}
+
+                <div>{{ class_name }} : {{ probability }} %</div>
+
+                {% endfor %}
+            </div>
+
+    {% else %}
+
+            <div class="boutton_predict">
+               <div>Chat_GPT : 00.00%</div> 
+               <div>Humain : 00.00%</div> 
+            </div>
+        
+
+    {% endif %}
+
+
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <textarea name="text">{{ text }} </textarea>
+        <br>
+        <input class="parcourir" type="file" name="file">
+        <div class="submit_btn">
+            <input type="submit" value="Analyser">
+        </div>
+
+    </form>
+
+</div>
+
+
+
+
+{% endblock content %}
